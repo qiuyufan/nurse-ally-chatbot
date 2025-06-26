@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurse Ally - Healthcare Navigation Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1><i class="fas fa-heartbeat"></i> Nurse Ally</h1>
+            <!-- Reset button will be added here by JavaScript -->
+        </div>
+        <div class="user-tools">
+            <div class="location-container">
+                <button id="detect-location" title="Detect my location"><i class="fas fa-map-marker-alt"></i> Detect Location</button>
+                <span id="location-status">No location detected</span>
+            </div>
+            <div class="insurance-upload-container">
+                <label for="insurance-upload" class="upload-label"><i class="fas fa-file-medical"></i> Upload Insurance</label>
+                <input type="file" id="insurance-upload" accept=".pdf,.jpg,.jpeg,.png" style="display:none;">
+                <span id="insurance-status">No file uploaded</span>
+            </div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot">
+                <div class="message-content">
+                    Hello! I'm Nurse Ally, your healthcare navigation assistant. I can help you with:
+                    <ul>
+                        <li>Assessing the urgency of your symptoms</li>
+                        <li>Understanding your insurance coverage</li>
+                        <li>Finding appropriate healthcare facilities near you</li>
+                    </ul>
+                    How can I assist you today?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Describe your symptoms or ask about healthcare options...">
+            <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+        <div class="disclaimer">
+            <p><i class="fas fa-info-circle"></i> Nurse Ally provides healthcare navigation assistance only, not medical advice. For medical emergencies, call 911 immediately.</p>
+        </div>
+    </div>
+    
+    <!-- Modal for displaying treatment and insurance coverage information -->
+    <div id="coverage-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Treatment & Coverage Analysis</h2>
+            <div id="treatment-info" class="modal-section">
+                <h3>Treatment Availability</h3>
+                <p id="treatment-status"></p>
+            </div>
+            <div id="coverage-info" class="modal-section">
+                <h3>Insurance Coverage</h3>
+                <p id="coverage-status"></p>
+            </div>
+            <div id="recommendation-info" class="modal-section">
+                <h3>Recommended Facility</h3>
+                <div id="recommended-facility"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

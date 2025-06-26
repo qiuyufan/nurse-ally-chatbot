@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurse Ally - Healthcare Navigation Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1><i class="fas fa-heartbeat"></i> Nurse Ally</h1>
+            <button id="reset-button">New Conversation</button>
+        </div>
+        <div class="user-tools">
+            <div class="location-container">
+                <button id="detect-location" title="Detect my location"><i class="fas fa-map-marker-alt"></i> Detect Location</button>
+                <span id="location-status">No location detected</span>
+            </div>
+            <div class="insurance-upload-container">
+                <label for="insurance-upload" class="upload-label"><i class="fas fa-file-medical"></i> Upload Insurance</label>
+                <input type="file" id="insurance-upload" accept=".pdf,.jpg,.jpeg,.png" style="display:none;">
+                <span id="insurance-status">No file uploaded</span>
+            </div>
+        </div>
+        <div class="profile-section">
+            <button id="edit-profile-btn"><i class="fas fa-user-edit"></i> Edit Profile</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot">
+                <div class="message-content">
+                    Hello! I'm Nurse Ally, your healthcare navigation assistant. I can help you with:
+                    <ul>
+                        <li>Assessing the urgency of your symptoms</li>
+                        <li>Understanding your insurance coverage</li>
+                        <li>Finding appropriate healthcare facilities near you</li>
+                    </ul>
+                    How can I assist you today?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Describe your symptoms or ask about healthcare options...">
+            <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+        <div class="disclaimer">
+            <p><i class="fas fa-info-circle"></i> Nurse Ally provides healthcare navigation assistance only, not medical advice. For medical emergencies, call 911 immediately.</p>
+        </div>
+    </div>
+    
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-profile-modal">&times;</span>
+            <h2>Your Profile</h2>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="nationality">Nationality</label>
+                    <input type="text" id="nationality" name="nationality">
+                </div>
+                <div class="form-group">
+                    <label for="insurance-type">Insurance Type</label>
+                    <select id="insurance-type" name="insurance_type">
+                        <option value="Travel">Travel Insurance</option>
+                        <option value="EHIC">EHIC (European Health Insurance Card)</option>
+                        <option value="Private">Private Insurance</option>
+                        <option value="None">No Insurance</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="insurance-provider">Insurance Provider</label>
+                    <input type="text" id="insurance-provider" name="insurance_provider">
+                </div>
+                <div class="form-group">
+                    <label for="country">Current Country</label>
+                    <input type="text" id="country" name="country">
+                </div>
+                <div class="form-group">
+                    <label for="city">Current City</label>
+                    <input type="text" id="city" name="city">
+                </div>
+                <div class="form-group">
+                    <label for="language">Preferred Language</label>
+                    <select id="language" name="language">
+                        <option value="English">English</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="French">French</option>
+                        <option value="German">German</option>
+                        <option value="Chinese">Chinese</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="chronic-conditions">Chronic Conditions (comma separated)</label>
+                    <input type="text" id="chronic-conditions" name="chronic_conditions">
+                </div>
+                <div class="form-group">
+                    <label for="allergies">Allergies (comma separated)</label>
+                    <input type="text" id="allergies" name="allergies">
+                </div>
+                <button type="submit" id="save-profile-btn">Save Profile</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Map Modal -->
+    <div id="map-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-map-modal">&times;</span>
+            <h2>Nearby Healthcare Facilities</h2>
+            <div id="map-container">
+                <iframe id="map-iframe" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
